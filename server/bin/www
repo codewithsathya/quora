@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+
+const app = require('../src/index');
+const debug = require('debug')('backend:server');
+const http = require('http');
+
+const port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+const server = http.createServer(app);
+
+server.listen(port);
+
+function normalizePort(value) {
+    let port = parseInt(value, 10);
+    
+    if(isNaN(port)) {
+        return value;  //It is named pipe
+    }
+    if(port >= 0) {
+        return port;  //port number
+    }
+    return false;
+}
